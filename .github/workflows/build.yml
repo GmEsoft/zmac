@@ -60,7 +60,7 @@ jobs:
         run: |
           cd src
           build.bat
-          
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -68,6 +68,36 @@ jobs:
           path: |
             src/zmac.exe
             src/zmac.1.pdf
+
+  build-windows-32:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup MSYS2 for 32-bit build
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW32
+          update: true
+          install: >-
+            mingw-w64-i686-gcc
+            bison
+
+      - name: Build native 32-bit executable
+        shell: msys2 {0}
+        run: |
+          cd src
+          gcc -Wall -static -o doc.exe -DMK_DOC doc.c
+          ./doc.exe >/dev/null
+          bison --output=zmac.c zmac.y
+          gcc -Wall -static -s -o zmac32.exe -DMSDOS zmac.c mio.c doc.c zi80dis.c
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: zmac-windows-32
+          path: |
+            src/zmac32.exe
 
   build-macos:
     runs-on: macos-latest
@@ -99,19 +129,19 @@ jobs:
             src/zmac.1.pdf
 
   release:
-    needs: [build-linux, build-windows, build-macos]
+    needs: [build-linux, build-windows, build-windows-32, build-macos]
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
     steps:
       - uses: actions/checkout@v4
-  
+
       - name: Download all artifacts
         uses: actions/download-artifact@v4
-  
+
       - name: Create release zip
         run: |
-          zip -r zmac-release.zip zmac-linux/ zmac-windows/ zmac-macos/
-  
+          zip -r zmac-release.zip zmac-linux/ zmac-windows/ zmac-windows-32/ zmac-macos/
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
