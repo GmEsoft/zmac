@@ -12,23 +12,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y gcc bison gzip groff
-      
+
       - name: Build
         run: |
           cd src
           make clean
           make
-      
+
       - name: Generate documentation
         run: |
           cd src
           make zmac.1.pdf
-      
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -42,16 +42,17 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Install dependencies
         run: |
           choco install mingw winflexbison -y
-      
+
       - name: Build
+        shell: cmd
         run: |
           cd src
           build.bat
-      
+          
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -64,22 +65,22 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Install dependencies
         run: |
           brew install gcc bison
-      
+
       - name: Build
         run: |
           cd src
           make clean
           make
-      
+
       - name: Generate documentation
         run: |
           cd src
           make zmac.1.pdf
-      
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -95,10 +96,10 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/')
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Download all artifacts
         uses: actions/download-artifact@v4
-      
+
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
