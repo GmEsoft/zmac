@@ -1,0 +1,27 @@
+CC0 1.0 Universal
+SPDX-License-Identifier: CC0-1.0
+
+This repository is distributed under the Creative Commons CC0 1.0 Universal
+public-domain dedication, consistent with the notice referenced in `src/doc.c`
+and on George Phillips' zmac project page.
+
+Canonical license URL:
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Human-readable summary:
+The person who associated a work with this deed has dedicated the work to the
+public domain by waiving all of his or her rights to the work worldwide under
+copyright law, including all related and neighboring rights, to the extent
+allowed by law.
+
+You can copy, modify, distribute and perform the work, even for commercial
+purposes, all without asking permission.
+
+Project-specific notice reflected from the existing source tree:
+
+To the extent possible under law, George Phillips has waived all copyright and
+related or neighboring rights to zmac macro cross assembler for the Zilog Z-80
+microprocessor. This work is published from Canada.
+
+For the complete legal code, see:
+https://creativecommons.org/publicdomain/zero/1.0/legalcode.en
