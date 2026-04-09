@@ -112,11 +112,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            zmac-linux/src/zmac
-            zmac-linux/src/zmac.1.gz
-            zmac-linux/src/zmac.1.pdf
-            zmac-windows/src/zmac.exe
-            zmac-windows/src/zmac.1.pdf
-            zmac-macos/src/zmac
-            zmac-macos/src/zmac.1.gz
-            zmac-macos/src/zmac.1.pdf
+            zmac-linux.zip
+            zmac-windows.zip
+            zmac-macos.zip
