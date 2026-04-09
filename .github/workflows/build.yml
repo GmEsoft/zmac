@@ -57,8 +57,6 @@ jobs:
 
       - name: Build
         shell: cmd
-        env:
-          CFLAGS: -std=c89 -Wno-implicit-function-declaration -Wno-old-style-definition
         run: |
           cd src
           build.bat
@@ -69,7 +67,7 @@ jobs:
           name: zmac-windows
           path: |
             src/zmac.exe
-            src/zmac.1.gz
+            src/zmac.1.pdf
 
   build-macos:
     runs-on: macos-latest
