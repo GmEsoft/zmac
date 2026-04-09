@@ -47,6 +47,14 @@ jobs:
         run: |
           choco install mingw winflexbison -y
 
+      - name: Setup bison path
+        run: |
+          $bisonPath = (Get-Command win_bison -ErrorAction SilentlyContinue).Source
+          if ($bisonPath) {
+            New-Item -ItemType SymbolicLink -Path "C:\ProgramData\Chocolatey\bin\bison.exe" -Target $bisonPath -Force
+          }
+        shell: powershell
+
       - name: Build
         shell: cmd
         run: |
