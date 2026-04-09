@@ -742,7 +742,7 @@ void putout(int value);
 int outrec;
 int outlen;
 unsigned char outbuf[1024 * 1024];
-void bookmark();
+void bookmark(int delay);
 void listfrombookmark();
 
 
@@ -5918,6 +5918,9 @@ int found_multi(int ch)
 	return 0;
 }
 
+
+char *getlocal(int c, int n);
+
 /*
  *  get the next character
  */
@@ -5925,7 +5928,6 @@ int nextchar()
 {
 	int c, ch;
 	unsigned char *p;
-	char *getlocal();
 
 	if (peekc != NOPEEK) {
 		c = peekc;
