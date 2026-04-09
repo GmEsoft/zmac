@@ -58,7 +58,7 @@ jobs:
       - name: Build
         shell: cmd
         env:
-          CFLAGS: -std:c89 -Wno-implicit-function-declaration -Wno-old-style-definition
+          CFLAGS: -std=c89 -Wno-implicit-function-declaration -Wno-old-style-definition
         run: |
           cd src
           build.bat
